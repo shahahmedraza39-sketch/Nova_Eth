@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova_Eth | Web3 Admin Panel</title>
+  
+  <!-- Google Fonts: Space Grotesk & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       EXACT COLOR PALETTE:
+       Background:              #0F1B2D
+       Cards / Sections:        #172B45
+       Primary Text:            #F5F7F8
+       Secondary Text:          #A8D0E0
+       Buttons / Links / Accent:#35C7E8
+       Hover:                   #6FA8C4
+       ========================================================================== */
+    :root {
+      --bg-main: #0F1B2D;
+      --bg-card: #172B45;
+      --bg-input: #0D1726;
+      --text-primary: #F5F7F8;
+      --text-secondary: #A8D0E0;
+      --accent-cyan: #35C7E8;
+      --accent-hover: #6FA8C4;
+      --accent-danger: #ef4444;
+      --border-cyan-subtle: rgba(53, 199, 232, 0.18);
+      --border-cyan-bright: rgba(53, 199, 232, 0.45);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.45);
+      --shadow-cyan: 0 0 25px rgba(53, 199, 232, 0.35);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Ambient Background Grid */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(53, 199, 232, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(53, 199, 232, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ==========================================================================
+       LOGIN VIEW
+       ========================================================================== */
+    #loginSection {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .login-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-cyan-bright);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: var(--shadow-card), var(--shadow-cyan);
+      position: relative;
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .login-badge {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      background: rgba(53, 199, 232, 0.1);
+      border: 1px solid var(--border-cyan-bright);
+      padding: 0.3rem 0.85rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .login-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .login-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-top: 0.35rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(53, 199, 232, 0.25);
+    }
+
+    .form-control:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Lockout Box */
+    .lockout-alert {
+      display: none;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--accent-danger);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .lockout-alert.active {
+      display: block;
+      animation: shake 0.4s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .lockout-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #fca5a5;
+      margin-bottom: 0.25rem;
+    }
+
+    .lockout-timer {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #ef4444;
+      margin: 0.5rem 0;
+      letter-spacing: 1px;
+    }
+
+    .lockout-desc {
+      font-size: 0.82rem;
+      color: #fca5a5;
+    }
+
+    .btn-login {
+      width: 100%;
+      background: var(--accent-cyan);
+      color: var(--bg-main);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 0.9rem;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(53, 199, 232, 0.4);
+    }
+
+    .btn-login:hover:not(:disabled) {
+      background: var(--accent-hover);
+      box-shadow: 0 6px 30px rgba(53, 199, 232, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-login:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .login-footer-back {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .login-footer-back a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .login-footer-back a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       DASHBOARD VIEW
+       ========================================================================== */
+    #dashboardSection {
+      display: none;
+      min-height: 100vh;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Top Bar */
+    .admin-navbar {
+      height: 75px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-cyan-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .badge-cms {
+      background: rgba(53, 199, 232, 0.15);
+      border: 1px solid var(--border-cyan-bright);
+      color: var(--accent-cyan);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .admin-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-top {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.55rem 1.25rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-save-all {
+      background: var(--accent-cyan);
+      color: var(--bg-main);
+      box-shadow: 0 2px 15px rgba(53, 199, 232, 0.4);
+    }
+
+    .btn-save-all:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-view-site {
+      background: var(--bg-input);
+      color: var(--text-primary);
+      border: 1px solid var(--border-cyan-subtle);
+    }
+
+    .btn-view-site:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .btn-logout {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-logout:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* Dashboard Layout */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: calc(100vh - 75px);
+    }
+
+    /* Sidebar Navigation */
+    .admin-sidebar {
+      background: #0d1726;
+      border-right: 1px solid var(--border-cyan-subtle);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .tab-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: rgba(53, 199, 232, 0.08);
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-card);
+      border-color: var(--border-cyan-bright);
+      color: var(--accent-cyan);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Main Form Area */
+    .admin-main {
+      padding: 2.5rem;
+      max-width: 1000px;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-cyan-subtle);
+      padding-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .panel-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .card-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* Dynamic Item List Cards (Communities, Projects, Proofs) */
+    .items-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .item-card {
+      background: #0d1726;
+      border: 1px solid var(--border-cyan-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .item-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(53, 199, 232, 0.1);
+    }
+
+    .item-counter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+    }
+
+    .btn-delete-item {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-delete-item:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .btn-add-item {
+      background: rgba(53, 199, 232, 0.1);
+      border: 1px dashed var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-add-item:hover {
+      background: rgba(53, 199, 232, 0.2);
+      color: #ffffff;
+    }
+
+    /* Reset to defaults */
+    .reset-box {
+      border: 1px dashed rgba(239, 68, 68, 0.3);
+      background: rgba(239, 68, 68, 0.05);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .reset-info h4 {
+      color: #fca5a5;
+      font-size: 1rem;
+    }
+
+    .reset-info p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .btn-reset {
+      background: transparent;
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      padding: 0.55rem 1.25rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-reset:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* Toast */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1000;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-cyan);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.5rem;
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-card), var(--shadow-cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 860px) {
+      .dashboard-layout {
+        grid-template-columns: 1fr;
+      }
+      .admin-sidebar {
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-cyan-subtle);
+      }
+      .tab-btn {
+        white-space: nowrap;
+      }
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      .admin-navbar {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <!-- =======================================================================
+       1. LOGIN SECTION (WITH 1-MINUTE SECURITY LOCKOUT)
+       ======================================================================= -->
+  <section id="loginSection">
+    <div class="login-card">
+      <div class="login-header">
+        <span class="login-badge">Restricted Access</span>
+        <h1 class="login-title">Nova_Eth Admin</h1>
+        <p class="login-subtitle">Enter credentials to edit your Web3 portfolio</p>
+      </div>
+
+      <!-- Lockout Notice (Shows 1 min countdown if password is wrong) -->
+      <div class="lockout-alert" id="lockoutAlert">
+        <h4 class="lockout-title">⚠️ Security Lockout Active</h4>
+        <div class="lockout-timer" id="lockoutTimer">01:00</div>
+        <p class="lockout-desc">Galt password lagane ki wajah se login 1 minute ke liye lock kar diya gaya hai. Timer khatam hone tak intezar karein.</p>
+      </div>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label for="adminEmail">Email Address</label>
+          <input type="email" id="adminEmail" class="form-control" placeholder="phpg242418313@gmail.com" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+          <input type="password" id="adminPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn-login" id="loginBtn">Authenticate & Enter</button>
+      </form>
+
+      <div class="login-footer-back">
+        <a href="index.html">&larr; Back to Live Portfolio Website</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       2. DASHBOARD CMS SECTION (EDIT ALL WEBSITE FIELDS)
+       ======================================================================= -->
+  <section id="dashboardSection">
+    <!-- Admin Top Navbar -->
+    <header class="admin-navbar">
+      <div class="admin-brand">
+        <span class="brand-title">Nova_Eth CMS</span>
+        <span class="badge-cms">Live Website Editor</span>
+      </div>
+
+      <div class="admin-actions">
+        <a href="index.html" target="_blank" class="btn-top btn-view-site">
+          <span>View Live Site</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <button class="btn-top btn-save-all" id="saveAllBtn">
+          <span>Save Changes</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+        <button class="btn-top btn-logout" id="logoutBtn">Logout</button>
+      </div>
+    </header>
+
+    <!-- Dashboard Sidebar + Form Area -->
+    <div class="dashboard-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="admin-sidebar">
+        <button class="tab-btn active" data-tab="tabHero">⚡ Hero & Profile</button>
+        <button class="tab-btn" data-tab="tabAbout">👤 About Me</button>
+        <button class="tab-btn" data-tab="tabCommunities">🌐 Communities (3)</button>
+        <button class="tab-btn" data-tab="tabFounder">👑 Founder Section</button>
+        <button class="tab-btn" data-tab="tabCollaborations">🚀 100+ Collaborations</button>
+        <button class="tab-btn" data-tab="tabServices">💼 What I Do (Services)</button>
+        <button class="tab-btn" data-tab="tabProcess">🔄 5-Step Process</button>
+        <button class="tab-btn" data-tab="tabResults">📊 Results & Stats</button>
+        <button class="tab-btn" data-tab="tabProof">🛡️ Proof of Work</button>
+        <button class="tab-btn" data-tab="tabContact">📬 Contact & Socials</button>
+      </aside>
+
+      <!-- Main Panels Container -->
+      <main class="admin-main">
+        
+        <!-- TAB 1: HERO & PROFILE -->
+        <div class="tab-panel active" id="tabHero">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Hero Section & Profile</h2>
+              <p class="panel-desc">Edit your main name, headline, avatar, social handles, and primary stats.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="heroName" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Role Tag</label>
+                <input type="text" id="heroRoleTag" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Headline</label>
+              <input type="text" id="heroHeadline" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="heroDescription" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label>X / Twitter Handle</label>
+                <input type="text" id="heroXHandle" class="form-control" placeholder="@nova_3th">
+              </div>
+              <div class="form-group">
+                <label>Discord Tag</label>
+                <input type="text" id="heroDiscordTag" class="form-control" placeholder="@nova_3th">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Profile Image URL or File Name (default: nova_eth.jpg)</label>
+              <input type="text" id="heroProfileImgUrl" class="form-control" placeholder="nova_eth.jpg">
+            </div>
+          </div>
+
+          <!-- Hero 4 Stats -->
+          <div class="card-panel">
+            <h3 style="font-family:'Space Grotesk'; font-size:1.1rem; margin-bottom:1rem; color:var(--accent-cyan)">Hero 4 Key Statistics</h3>
+            <div class="grid-4">
+              <div class="form-group">
+                <label>Stat 1 Value</label>
+                <input type="text" id="heroStat1Val" class="form-control">
+                <label style="margin-top:0.3rem">Stat 1 Label</label>
+                <input type="text" id="heroStat1Lbl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Stat 2 Value</label>
+                <input type="text" id="heroStat2Val" class="form-control">
+                <label style="margin-top:0.3rem">Stat 2 Label</label>
+                <input type="text" id="heroStat2Lbl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Stat 3 Value</label>
+                <input type="text" id="heroStat3Val" class="form-control">
+                <label style="margin-top:0.3rem">Stat 3 Label</label>
+                <input type="text" id="heroStat3Lbl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Stat 4 Value</label>
+                <input type="text" id="heroStat4Val" class="form-control">
+                <label style="margin-top:0.3rem">Stat 4 Label</label>
+                <input type="text" id="heroStat4Lbl" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: ABOUT ME -->
+        <div class="tab-panel" id="tabAbout">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">About Me Section</h2>
+              <p class="panel-desc">Edit bio paragraphs, skill chips, and sidebar stats.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="form-group">
+              <label>Lead Paragraph</label>
+              <textarea id="aboutLead" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Body Paragraph</label>
+              <textarea id="aboutBody" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Skills / Expertise Matrix (Comma separated)</label>
+              <textarea id="aboutSkills" class="form-control" rows="3" placeholder="Web3 Project Research, Project Team Outreach, ..."></textarea>
+            </div>
+
+            <h3 style="font-family:'Space Grotesk'; font-size:1.1rem; margin:1.5rem 0 1rem; color:var(--accent-cyan)">About Sidebar Highlights</h3>
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Highlight 1 (e.g. 4+ Years)</label>
+                <input type="text" id="aboutSide1Val" class="form-control">
+                <input type="text" id="aboutSide1Lbl" class="form-control" style="margin-top:0.3rem">
+              </div>
+              <div class="form-group">
+                <label>Highlight 2 (e.g. 2.5+ Years)</label>
+                <input type="text" id="aboutSide2Val" class="form-control">
+                <input type="text" id="aboutSide2Lbl" class="form-control" style="margin-top:0.3rem">
+              </div>
+              <div class="form-group">
+                <label>Highlight 3 (e.g. 100+)</label>
+                <input type="text" id="aboutSide3Val" class="form-control">
+                <input type="text" id="aboutSide3Lbl" class="form-control" style="margin-top:0.3rem">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: COMMUNITIES -->
+        <div class="tab-panel" id="tabCommunities">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Communities I Work With</h2>
+              <p class="panel-desc">Add, edit, or remove the communities you manage as Collab Manager.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="items-container" id="communitiesList"></div>
+            <button class="btn-add-item" id="addCommunityBtn">+ Add New Community</button>
+          </div>
+        </div>
+
+        <!-- TAB 4: FOUNDER SECTION -->
+        <div class="tab-panel" id="tabFounder">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Founder of Alpha Core</h2>
+              <p class="panel-desc">Edit your featured founder showcase card.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="form-group">
+              <label>Founder Section Title</label>
+              <input type="text" id="founderTitle" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Founder Quote</label>
+              <textarea id="founderQuote" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="grid-3">
+              <div class="form-group">
+                <label>Community Name</label>
+                <input type="text" id="founderCommunity" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Role</label>
+                <input type="text" id="founderRole" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Mission</label>
+                <input type="text" id="founderMission" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Alpha Core X Link</label>
+              <input type="url" id="founderXLink" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: 100+ COLLABORATIONS -->
+        <div class="tab-panel" id="tabCollaborations">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">100+ Web3 Collaborations</h2>
+              <p class="panel-desc">Manage centerpiece text and individual project cards.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Centerpiece Number</label>
+                <input type="text" id="collabNumber" class="form-control" value="100+">
+              </div>
+              <div class="form-group">
+                <label>Centerpiece Title</label>
+                <input type="text" id="collabTitle" class="form-control" value="Web3 Collaborations">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Section Subtitle</label>
+              <input type="text" id="collabSubtitle" class="form-control">
+            </div>
+
+            <h3 style="font-family:'Space Grotesk'; font-size:1.15rem; margin:1.5rem 0 1rem; color:var(--accent-cyan)">Featured Collaboration Project Cards</h3>
+            
+            <div class="items-container" id="collabsList"></div>
+            <button class="btn-add-item" id="addCollabBtn">+ Add New Collaboration Project</button>
+          </div>
+        </div>
+
+        <!-- TAB 6: SERVICES -->
+        <div class="tab-panel" id="tabServices">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">What I Do (Services)</h2>
+              <p class="panel-desc">Edit titles and descriptions for all 8 service cards.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="items-container" id="servicesList"></div>
+          </div>
+        </div>
+
+        <!-- TAB 7: PROCESS -->
+        <div class="tab-panel" id="tabProcess">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Collaboration Process</h2>
+              <p class="panel-desc">Edit the 5 workflow steps.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="items-container" id="processList"></div>
+          </div>
+        </div>
+
+        <!-- TAB 8: RESULTS -->
+        <div class="tab-panel" id="tabResults">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Results & Experience Metrics</h2>
+              <p class="panel-desc">Update verified metrics and descriptions.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="items-container" id="resultsList"></div>
+          </div>
+        </div>
+
+        <!-- TAB 9: PROOF OF WORK -->
+        <div class="tab-panel" id="tabProof">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Proof of Work Records</h2>
+              <p class="panel-desc">Add, edit, or remove proof records and verification notes.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="items-container" id="proofsList"></div>
+            <button class="btn-add-item" id="addProofBtn">+ Add New Proof Record</button>
+          </div>
+        </div>
+
+        <!-- TAB 10: CONTACT -->
+        <div class="tab-panel" id="tabContact">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Contact & Final CTA</h2>
+              <p class="panel-desc">Edit contact title, description, and direct connection links.</p>
+            </div>
+          </div>
+
+          <div class="card-panel">
+            <div class="form-group">
+              <label>Contact Title</label>
+              <input type="text" id="contactTitle" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label>Contact Description</label>
+              <textarea id="contactDescription" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Direct Message on X URL</label>
+                <input type="url" id="contactXUrl" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Discord Handle</label>
+                <input type="text" id="contactDiscordHandle" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- Reset All Section -->
+          <div class="reset-box">
+            <div class="reset-info">
+              <h4>Reset to Default Content</h4>
+              <p>Warning: This will restore the original website content and erase manual customizations.</p>
+            </div>
+            <button class="btn-reset" id="resetDefaultsBtn">Reset to Defaults</button>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Shared Data & CMS Script -->
+  <script src="site-data.js"></script>
+  <script>
+    // =========================================================================
+    // ADMIN AUTHENTICATION WITH 1-MINUTE SECURITY LOCKOUT
+    // =========================================================================
+    const CORRECT_EMAIL = "phpg242418313@gmail.com";
+    const CORRECT_PASS = "Ahmed1231";
+    const LOCKOUT_DURATION_MS = 60 * 1000; // 1 Minute (60 seconds)
+
+    const loginSection = document.getElementById('loginSection');
+    const dashboardSection = document.getElementById('dashboardSection');
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const adminEmail = document.getElementById('adminEmail');
+    const adminPassword = document.getElementById('adminPassword');
+    const loginBtn = document.getElementById('loginBtn');
+    const lockoutAlert = document.getElementById('lockoutAlert');
+    const lockoutTimer = document.getElementById('lockoutTimer');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const saveAllBtn = document.getElementById('saveAllBtn');
+    const toastContainer = document.getElementById('toastContainer');
+
+    let lockoutInterval = null;
+
+    // Toast Utility
+    function showToast(message, icon = '⚡') {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span>${icon}</span><span>${message}</span>`;
+      toastContainer.appendChild(toast);
+      setTimeout(() => toast.remove(), 3200);
+    }
+
+    // Check Lockout Status
+    function checkLockout() {
+      const lockoutUntil = parseInt(localStorage.getItem('nova_admin_lockout_until') || '0', 10);
+      const now = Date.now();
+
+      if (lockoutUntil > now) {
+        startLockoutCountdown(lockoutUntil);
+      } else {
+        clearLockout();
+      }
+    }
+
+    function startLockoutCountdown(lockoutUntil) {
+      if (lockoutInterval) clearInterval(lockoutInterval);
+
+      adminEmail.disabled = true;
+      adminPassword.disabled = true;
+      loginBtn.disabled = true;
+      lockoutAlert.classList.add('active');
+
+      function updateTimer() {
+        const remainingMs = lockoutUntil - Date.now();
+        if (remainingMs <= 0) {
+          clearLockout();
+          showToast('Lockout time expired! You may now try logging in again.', '🔓');
+          return;
+        }
+
+        const totalSec = Math.ceil(remainingMs / 1000);
+        const mins = String(Math.floor(totalSec / 60)).padStart(2, '0');
+        const secs = String(totalSec % 60).padStart(2, '0');
+        lockoutTimer.textContent = `${mins}:${secs}`;
+      }
+
+      updateTimer();
+      lockoutInterval = setInterval(updateTimer, 1000);
+    }
+
+    function clearLockout() {
+      if (lockoutInterval) clearInterval(lockoutInterval);
+      localStorage.removeItem('nova_admin_lockout_until');
+      lockoutAlert.classList.remove('active');
+      adminEmail.disabled = false;
+      adminPassword.disabled = false;
+      loginBtn.disabled = false;
+    }
+
+    // Check Login State
+    function checkAuthSession() {
+      const isLoggedIn = sessionStorage.getItem('nova_admin_logged_in') === 'true';
+      if (isLoggedIn) {
+        showDashboard();
+      } else {
+        showLogin();
+      }
+    }
+
+    function showDashboard() {
+      loginSection.style.display = 'none';
+      dashboardSection.style.display = 'block';
+      loadFormData();
+    }
+
+    function showLogin() {
+      dashboardSection.style.display = 'none';
+      loginSection.style.display = 'flex';
+      checkLockout();
+    }
+
+    // Login Form Submit
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Check if already in lockout
+      const lockoutUntil = parseInt(localStorage.getItem('nova_admin_lockout_until') || '0', 10);
+      if (lockoutUntil > Date.now()) {
+        return;
+      }
+
+      const emailVal = adminEmail.value.trim();
+      const passVal = adminPassword.value.trim();
+
+      if (emailVal === CORRECT_EMAIL && passVal === CORRECT_PASS) {
+        sessionStorage.setItem('nova_admin_logged_in', 'true');
+        clearLockout();
+        showToast('Login successful! Welcome Nova_Eth.', '✨');
+        showDashboard();
+      } else {
+        // Trigger 1-Minute Security Lockout
+        const newLockoutUntil = Date.now() + LOCKOUT_DURATION_MS;
+        localStorage.setItem('nova_admin_lockout_until', newLockoutUntil.toString());
+        startLockoutCountdown(newLockoutUntil);
+        showToast('Incorrect credentials! Security lockout activated for 1 minute.', '⛔');
+      }
+    });
+
+    // Logout
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('nova_admin_logged_in');
+      showLogin();
+      showToast('Logged out successfully.', '👋');
+    });
+
+    // =========================================================================
+    // CMS TAB SWITCHING
+    // =========================================================================
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const targetTab = document.getElementById(btn.getAttribute('data-tab'));
+        if (targetTab) targetTab.classList.add('active');
+      });
+    });
+
+    // =========================================================================
+    // CMS FORM DATA POPULATION & SAVING
+    // =========================================================================
+    let currentData = {};
+
+    function loadFormData() {
+      currentData = getSiteData();
+
+      // Tab 1: Hero
+      document.getElementById('heroName').value = currentData.hero.name || '';
+      document.getElementById('heroRoleTag').value = currentData.hero.roleTag || '';
+      document.getElementById('heroHeadline').value = currentData.hero.headline || '';
+      document.getElementById('heroDescription').value = currentData.hero.description || '';
+      document.getElementById('heroXHandle').value = currentData.hero.xHandle || '';
+      document.getElementById('heroDiscordTag').value = currentData.hero.discordTag || '';
+      document.getElementById('heroProfileImgUrl').value = currentData.hero.profileImgUrl || '';
+
+      document.getElementById('heroStat1Val').value = currentData.hero.stats[0]?.val || '';
+      document.getElementById('heroStat1Lbl').value = currentData.hero.stats[0]?.lbl || '';
+      document.getElementById('heroStat2Val').value = currentData.hero.stats[1]?.val || '';
+      document.getElementById('heroStat2Lbl').value = currentData.hero.stats[1]?.lbl || '';
+      document.getElementById('heroStat3Val').value = currentData.hero.stats[2]?.val || '';
+      document.getElementById('heroStat3Lbl').value = currentData.hero.stats[2]?.lbl || '';
+      document.getElementById('heroStat4Val').value = currentData.hero.stats[3]?.val || '';
+      document.getElementById('heroStat4Lbl').value = currentData.hero.stats[3]?.lbl || '';
+
+      // Tab 2: About
+      document.getElementById('aboutLead').value = currentData.about.lead || '';
+      document.getElementById('aboutBody').value = currentData.about.body || '';
+      document.getElementById('aboutSkills').value = (currentData.about.skills || []).join(', ');
+
+      document.getElementById('aboutSide1Val').value = currentData.about.sideStats[0]?.val || '';
+      document.getElementById('aboutSide1Lbl').value = currentData.about.sideStats[0]?.lbl || '';
+      document.getElementById('aboutSide2Val').value = currentData.about.sideStats[1]?.val || '';
+      document.getElementById('aboutSide2Lbl').value = currentData.about.sideStats[1]?.lbl || '';
+      document.getElementById('aboutSide3Val').value = currentData.about.sideStats[2]?.val || '';
+      document.getElementById('aboutSide3Lbl').value = currentData.about.sideStats[2]?.lbl || '';
+
+      // Tab 3: Communities
+      renderCommunitiesList();
+
+      // Tab 4: Founder
+      document.getElementById('founderTitle').value = currentData.founder.title || '';
+      document.getElementById('founderQuote').value = currentData.founder.quote || '';
+      document.getElementById('founderCommunity').value = currentData.founder.community || '';
+      document.getElementById('founderRole').value = currentData.founder.role || '';
+      document.getElementById('founderMission').value = currentData.founder.mission || '';
+      document.getElementById('founderXLink').value = currentData.founder.xLink || '';
+
+      // Tab 5: Collaborations
+      document.getElementById('collabNumber').value = currentData.collaborations.number || '100+';
+      document.getElementById('collabTitle').value = currentData.collaborations.title || 'Web3 Collaborations';
+      document.getElementById('collabSubtitle').value = currentData.collaborations.subtitle || '';
+      renderCollabsList();
+
+      // Tab 6: Services
+      renderServicesList();
+
+      // Tab 7: Process
+      renderProcessList();
+
+      // Tab 8: Results
+      renderResultsList();
+
+      // Tab 9: Proof
+      renderProofsList();
+
+      // Tab 10: Contact
+      document.getElementById('contactTitle').value = currentData.contact.title || '';
+      document.getElementById('contactDescription').value = currentData.contact.description || '';
+      document.getElementById('contactXUrl').value = currentData.contact.xUrl || '';
+      document.getElementById('contactDiscordHandle').value = currentData.contact.discordHandle || '';
+    }
+
+    // Communities Renderer
+    function renderCommunitiesList() {
+      const container = document.getElementById('communitiesList');
+      container.innerHTML = '';
+
+      currentData.communities.forEach((comm, index) => {
+        const item = document.createElement('div');
+        item.className = 'item-card';
+        item.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-counter">Community #${index + 1}</span>
+            <button class="btn-delete-item" onclick="deleteCommunity(${index})">Remove</button>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Community Name</label>
+              <input type="text" class="form-control comm-name" value="${comm.name}" data-idx="${index}">
+            </div>
+            <div class="form-group">
+              <label>Monogram / Initial (e.g. HA)</label>
+              <input type="text" class="form-control comm-mono" value="${comm.monogram}" data-idx="${index}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control comm-desc" rows="2" data-idx="${index}">${comm.desc}</textarea>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Role Badge</label>
+              <input type="text" class="form-control comm-badge" value="${comm.roleBadge}" data-idx="${index}">
+            </div>
+            <div class="form-group">
+              <label>X / Twitter URL</label>
+              <input type="url" class="form-control comm-link" value="${comm.xLink}" data-idx="${index}">
+            </div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    window.deleteCommunity = function(index) {
+      currentData.communities.splice(index, 1);
+      renderCommunitiesList();
+    };
+
+    document.getElementById('addCommunityBtn').addEventListener('click', () => {
+      currentData.communities.push({
+        name: "New Alpha Community",
+        monogram: "NC",
+        roleBadge: "Collab Manager",
+        desc: "High-conviction Web3 alpha community.",
+        xLink: "https://x.com/"
+      });
+      renderCommunitiesList();
+    });
+
+    // Collaborations Renderer
+    function renderCollabsList() {
+      const container = document.getElementById('collabsList');
+      container.innerHTML = '';
+
+      currentData.collaborations.projects.forEach((proj, index) => {
+        const item = document.createElement('div');
+        item.className = 'item-card';
+        item.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-counter">Project #${index + 1}</span>
+            <button class="btn-delete-item" onclick="deleteCollab(${index})">Remove</button>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Project Name</label>
+              <input type="text" class="form-control proj-name" value="${proj.name}" data-idx="${index}">
+            </div>
+            <div class="form-group">
+              <label>Monogram (e.g. BF)</label>
+              <input type="text" class="form-control proj-mono" value="${proj.monogram}" data-idx="${index}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control proj-desc" rows="2" data-idx="${index}">${proj.desc}</textarea>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Collaboration Badge</label>
+              <input type="text" class="form-control proj-badge" value="${proj.badge}" data-idx="${index}">
+            </div>
+            <div class="form-group">
+              <label>X / Twitter URL</label>
+              <input type="url" class="form-control proj-link" value="${proj.xLink}" data-idx="${index}">
+            </div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    window.deleteCollab = function(index) {
+      currentData.collaborations.projects.splice(index, 1);
+      renderCollabsList();
+    };
+
+    document.getElementById('addCollabBtn').addEventListener('click', () => {
+      currentData.collaborations.projects.push({
+        name: "New Project Partner",
+        monogram: "NP",
+        badge: "Verified Collaboration",
+        desc: "WL & GTD spot distribution and partnership campaign.",
+        xLink: "https://x.com/"
+      });
+      renderCollabsList();
+    });
+
+    // Services Renderer
+    function renderServicesList() {
+      const container = document.getElementById('servicesList');
+      container.innerHTML = '';
+
+      currentData.services.forEach((srv, index) => {
+        const item = document.createElement('div');
+        item.className = 'item-card';
+        item.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-counter">Service #${index + 1}</span>
+          </div>
+          <div class="form-group">
+            <label>Service Title</label>
+            <input type="text" class="form-control srv-title" value="${srv.title}" data-idx="${index}">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control srv-desc" rows="2" data-idx="${index}">${srv.desc}</textarea>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // Process Renderer
+    function renderProcessList() {
+      const container = document.getElementById('processList');
+      container.innerHTML = '';
+
+      currentData.process.forEach((prc, index) => {
+        const item = document.createElement('div');
+        item.className = 'item-card';
+        item.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-counter">Step ${prc.step}</span>
+          </div>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control prc-title" value="${prc.title}" data-idx="${index}">
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control prc-desc" rows="2" data-idx="${index}">${prc.desc}</textarea>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // Results Renderer
+    function renderResultsList() {
+      const container = document.getElementById('resultsList');
+      container.innerHTML = '';
+
+      currentData.results.forEach((res, index) => {
+        const item = document.createElement('div');
+        item.className = 'item-card';
+        item.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-counter">Metric #${index + 1}</span>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Number Value (e.g. 4+, 100+)</label>
+              <input type="text" class="form-control res-val" value="${res.val}" data-idx="${index}">
+            </div>
+            <div class="form-group">
+              <label>Label</label>
+              <input type="text" class="form-control res-lbl" value="${res.lbl}" data-idx="${index}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Description / Subtext</label>
+            <input type="text" class="form-control res-sub" value="${res.sub}" data-idx="${index}">
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // Proofs Renderer
+    function renderProofsList() {
+      const container = document.getElementById('proofsList');
+      container.innerHTML = '';
+
+      currentData.proofs.forEach((prf, index) => {
+        const item = document.createElement('div');
+        item.className = 'item-card';
+        item.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-counter">Proof #${index + 1}</span>
+            <button class="btn-delete-item" onclick="deleteProof(${index})">Remove</button>
+          </div>
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Tag / Category</label>
+              <input type="text" class="form-control prf-tag" value="${prf.tag}" data-idx="${index}">
+            </div>
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" class="form-control prf-title" value="${prf.title}" data-idx="${index}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Preview Text / Snippet</label>
+            <textarea class="form-control prf-snippet" rows="2" data-idx="${index}">${prf.snippet}</textarea>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    window.deleteProof = function(index) {
+      currentData.proofs.splice(index, 1);
+      renderProofsList();
+    };
+
+    document.getElementById('addProofBtn').addEventListener('click', () => {
+      currentData.proofs.push({
+        tag: "Collaboration Confirmation",
+        title: "New Allocation Sign-Off",
+        snippet: "Direct project agreement and verified mint allocation."
+      });
+      renderProofsList();
+    });
+
+    // SAVE ALL CHANGES
+    saveAllBtn.addEventListener('click', () => {
+      // Gather Tab 1
+      currentData.hero.name = document.getElementById('heroName').value;
+      currentData.hero.roleTag = document.getElementById('heroRoleTag').value;
+      currentData.hero.headline = document.getElementById('heroHeadline').value;
+      currentData.hero.description = document.getElementById('heroDescription').value;
+      currentData.hero.xHandle = document.getElementById('heroXHandle').value;
+      currentData.hero.discordTag = document.getElementById('heroDiscordTag').value;
+      currentData.hero.profileImgUrl = document.getElementById('heroProfileImgUrl').value;
+
+      currentData.hero.stats = [
+        { val: document.getElementById('heroStat1Val').value, lbl: document.getElementById('heroStat1Lbl').value },
+        { val: document.getElementById('heroStat2Val').value, lbl: document.getElementById('heroStat2Lbl').value },
+        { val: document.getElementById('heroStat3Val').value, lbl: document.getElementById('heroStat3Lbl').value },
+        { val: document.getElementById('heroStat4Val').value, lbl: document.getElementById('heroStat4Lbl').value }
+      ];
+
+      // Gather Tab 2
+      currentData.about.lead = document.getElementById('aboutLead').value;
+      currentData.about.body = document.getElementById('aboutBody').value;
+      currentData.about.skills = document.getElementById('aboutSkills').value.split(',').map(s => s.trim()).filter(Boolean);
+      currentData.about.sideStats = [
+        { val: document.getElementById('aboutSide1Val').value, lbl: document.getElementById('aboutSide1Lbl').value },
+        { val: document.getElementById('aboutSide2Val').value, lbl: document.getElementById('aboutSide2Lbl').value },
+        { val: document.getElementById('aboutSide3Val').value, lbl: document.getElementById('aboutSide3Lbl').value }
+      ];
+
+      // Gather Tab 3 (Communities)
+      const commNames = document.querySelectorAll('.comm-name');
+      const commMonos = document.querySelectorAll('.comm-mono');
+      const commDescs = document.querySelectorAll('.comm-desc');
+      const commBadges = document.querySelectorAll('.comm-badge');
+      const commLinks = document.querySelectorAll('.comm-link');
+
+      currentData.communities = [];
+      commNames.forEach((el, i) => {
+        currentData.communities.push({
+          name: el.value,
+          monogram: commMonos[i].value,
+          desc: commDescs[i].value,
+          roleBadge: commBadges[i].value,
+          xLink: commLinks[i].value
+        });
+      });
+
+      // Gather Tab 4 (Founder)
+      currentData.founder.title = document.getElementById('founderTitle').value;
+      currentData.founder.quote = document.getElementById('founderQuote').value;
+      currentData.founder.community = document.getElementById('founderCommunity').value;
+      currentData.founder.role = document.getElementById('founderRole').value;
+      currentData.founder.mission = document.getElementById('founderMission').value;
+      currentData.founder.xLink = document.getElementById('founderXLink').value;
+
+      // Gather Tab 5 (Collaborations)
+      currentData.collaborations.number = document.getElementById('collabNumber').value;
+      currentData.collaborations.title = document.getElementById('collabTitle').value;
+      currentData.collaborations.subtitle = document.getElementById('collabSubtitle').value;
+
+      const projNames = document.querySelectorAll('.proj-name');
+      const projMonos = document.querySelectorAll('.proj-mono');
+      const projDescs = document.querySelectorAll('.proj-desc');
+      const projBadges = document.querySelectorAll('.proj-badge');
+      const projLinks = document.querySelectorAll('.proj-link');
+
+      currentData.collaborations.projects = [];
+      projNames.forEach((el, i) => {
+        currentData.collaborations.projects.push({
+          name: el.value,
+          monogram: projMonos[i].value,
+          desc: projDescs[i].value,
+          badge: projBadges[i].value,
+          xLink: projLinks[i].value
+        });
+      });
+
+      // Gather Tab 6 (Services)
+      const srvTitles = document.querySelectorAll('.srv-title');
+      const srvDescs = document.querySelectorAll('.srv-desc');
+      currentData.services.forEach((srv, i) => {
+        if (srvTitles[i]) srv.title = srvTitles[i].value;
+        if (srvDescs[i]) srv.desc = srvDescs[i].value;
+      });
+
+      // Gather Tab 7 (Process)
+      const prcTitles = document.querySelectorAll('.prc-title');
+      const prcDescs = document.querySelectorAll('.prc-desc');
+      currentData.process.forEach((prc, i) => {
+        if (prcTitles[i]) prc.title = prcTitles[i].value;
+        if (prcDescs[i]) prc.desc = prcDescs[i].value;
+      });
+
+      // Gather Tab 8 (Results)
+      const resVals = document.querySelectorAll('.res-val');
+      const resLbls = document.querySelectorAll('.res-lbl');
+      const resSubs = document.querySelectorAll('.res-sub');
+      currentData.results.forEach((res, i) => {
+        if (resVals[i]) res.val = resVals[i].value;
+        if (resLbls[i]) res.lbl = resLbls[i].value;
+        if (resSubs[i]) res.sub = resSubs[i].value;
+      });
+
+      // Gather Tab 9 (Proofs)
+      const prfTags = document.querySelectorAll('.prf-tag');
+      const prfTitles = document.querySelectorAll('.prf-title');
+      const prfSnippets = document.querySelectorAll('.prf-snippet');
+      currentData.proofs = [];
+      prfTags.forEach((el, i) => {
+        currentData.proofs.push({
+          tag: el.value,
+          title: prfTitles[i].value,
+          snippet: prfSnippets[i].value
+        });
+      });
+
+      // Gather Tab 10 (Contact)
+      currentData.contact.title = document.getElementById('contactTitle').value;
+      currentData.contact.description = document.getElementById('contactDescription').value;
+      currentData.contact.xUrl = document.getElementById('contactXUrl').value;
+      currentData.contact.discordHandle = document.getElementById('contactDiscordHandle').value;
+
+      // Save to localStorage
+      saveSiteData(currentData);
+      showToast('All changes saved! Live website updated.', '💾');
+    });
+
+    // Reset Defaults
+    document.getElementById('resetDefaultsBtn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to reset all content back to defaults?')) {
+        localStorage.removeItem('nova_site_custom_data');
+        loadFormData();
+        showToast('Website content reset to original defaults!', '🔄');
+      }
+    });
+
+    // Initialize on load
+    checkAuthSession();
+  </script>
+</body>
+</html>

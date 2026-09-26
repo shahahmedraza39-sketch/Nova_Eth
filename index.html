@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nova_Eth | Professional Web3 Collab Manager. 2.5+ years of Collab Management experience and 4+ years in Web3, building partnerships between projects and communities.">
+  <meta name="keywords" content="Nova_Eth, Web3 Collab Manager, Web3 Collaborations, Alpha Core, WL Allocations, GTD Allocations, Discord Collaborations, Twitter Web3">
+  <meta name="author" content="Nova_Eth">
+  <title>Nova_Eth | Web3 Collab Manager & Founder of Alpha Core</title>
+
+  <!-- Google Fonts: Space Grotesk & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Futuristic Web3 Background: Digital Grid & Particle Canvas -->
+  <div class="web3-bg-grid" aria-hidden="true"></div>
+  <canvas id="networkCanvas" class="network-canvas" aria-hidden="true"></canvas>
+  <div class="cyan-glow-orb glow-top-left" aria-hidden="true"></div>
+  <div class="cyan-glow-orb glow-bottom-right" aria-hidden="true"></div>
+
+  <!-- Sticky Modern Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="nav-brand">
+        <div class="brand-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="brand-svg">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+          </svg>
+        </div>
+        <div class="brand-title-group">
+          <span class="brand-name">Nova_Eth</span>
+          <span class="brand-role-tag">Collab Manager</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-item active">Home</a></li>
+          <li><a href="#about" class="nav-item">About</a></li>
+          <li><a href="#communities" class="nav-item">Communities</a></li>
+          <li><a href="#collaborations" class="nav-item">Collaborations</a></li>
+          <li><a href="#services" class="nav-item">Services</a></li>
+          <li><a href="#proof" class="nav-item">Proof of Work</a></li>
+          <li><a href="#contact" class="nav-item">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Action & Mobile Toggle -->
+      <div class="nav-actions">
+        <a href="admin.html" class="btn-nav-admin" title="Admin Panel">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><rect x="4" y="10" width="16" height="12" rx="2"/></svg>
+          <span>Admin</span>
+        </a>
+        <a href="#contact" class="btn-nav-connect">
+          <span class="pulse-cyan-dot"></span>
+          <span>Connect</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="section hero-section" id="home">
+      <div class="container hero-container">
+        
+        <!-- Left Hero Content -->
+        <div class="hero-content">
+          <div class="hero-badge-wrap">
+            <span class="hero-badge">
+              <span class="badge-dot"></span>
+              Web3 Collab Manager
+            </span>
+            <span class="hero-badge-sub">Founder @ Alpha Core</span>
+          </div>
+
+          <h1 class="hero-title">
+            <span class="name-highlight">Nova_Eth</span>
+            <span class="hero-headline">Connecting Web3 Projects With Strong Communities.</span>
+          </h1>
+
+          <p class="hero-description">
+            2.5+ years of Collab Management experience and 4+ years in Web3, building partnerships between projects and communities.
+          </p>
+
+          <!-- Verified Statistics Grid -->
+          <div class="hero-stats-grid">
+            <div class="hero-stat-card">
+              <span class="stat-number">4+</span>
+              <span class="stat-label">Years in Web3</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-number">2.5+</span>
+              <span class="stat-label">Years as Collab Manager</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-number">100+</span>
+              <span class="stat-label">Projects Collaborated With</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-number">4</span>
+              <span class="stat-label">Web3 Communities</span>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="hero-cta-group">
+            <a href="#collaborations" class="btn btn-primary">
+              <span>View My Collaborations</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <span>Contact Me</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Hero Social Handles -->
+          <div class="hero-social-row">
+            <span class="social-label">Official Handles:</span>
+            <a href="https://x.com/nova_3th" target="_blank" rel="noopener noreferrer" class="social-pill" title="Follow on X (Twitter)">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              <span>X: @nova_3th</span>
+            </a>
+            <button class="social-pill discord-copy-pill" id="heroDiscordBtn" data-discord="@nova_3th" title="Copy Discord Tag">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+              </svg>
+              <span class="discord-tag-text">Discord: @nova_3th</span>
+              <span class="copy-tag-pill">Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual: Profile & Web3 Circuit -->
+        <div class="hero-visual">
+          <div class="web3-avatar-frame">
+            <div class="circuit-ring circuit-outer"></div>
+            <div class="circuit-ring circuit-inner"></div>
+            
+            <div class="avatar-container">
+              <!-- Professional profile image placeholder; currently equipped with official Nova_Eth avatar -->
+              <img src="nova_eth.jpg" alt="Nova_Eth - Web3 Collab Manager Profile Avatar" class="avatar-img" id="heroProfileImg">
+            </div>
+
+            <!-- Floating Web3 Badges -->
+            <div class="floating-web3-tag tag-top">
+              <span class="web3-icon">⚡</span>
+              <div class="tag-meta">
+                <span class="tag-title">100+ Collabs</span>
+                <span class="tag-desc">Verified Ecosystem</span>
+              </div>
+            </div>
+
+            <div class="floating-web3-tag tag-bottom">
+              <span class="web3-icon">🛡️</span>
+              <div class="tag-meta">
+                <span class="tag-title">WL / GTD / FCFS</span>
+                <span class="tag-desc">Allocation Lead</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        
+        <div class="section-heading">
+          <span class="section-tag">BACKGROUND & PROFILE</span>
+          <h2 class="section-title">About <span class="cyan-text">Nova_Eth</span></h2>
+        </div>
+
+        <div class="about-card">
+          <div class="about-grid">
+            
+            <div class="about-main-text">
+              <p class="about-lead">
+                <strong>Nova_Eth</strong> is a Web3 Collab Manager with <strong>2.5+ years of experience</strong> in collaboration management and <strong>4+ years of experience</strong> in the Web3 ecosystem.
+              </p>
+              <p class="about-body">
+                His work focuses on building relationships between Web3 projects and communities, securing WL/GTD/FCFS allocations, coordinating collaboration campaigns, managing project outreach, and creating meaningful partnerships between projects and communities.
+              </p>
+              
+              <!-- Core Skill Pills -->
+              <div class="about-skills-matrix">
+                <span class="skill-chip">Web3 Project Research</span>
+                <span class="skill-chip">Project Team Outreach</span>
+                <span class="skill-chip">Partnership Management</span>
+                <span class="skill-chip">WL / GTD / FCFS Allocations</span>
+                <span class="skill-chip">Community Partnerships</span>
+                <span class="skill-chip">Raffles & Giveaways</span>
+                <span class="skill-chip">Discord Collaboration</span>
+                <span class="skill-chip">X/Twitter Collaboration</span>
+                <span class="skill-chip">Community Growth</span>
+              </div>
+            </div>
+
+            <div class="about-side-stats">
+              <div class="about-stat-box">
+                <span class="stat-highlight-val">4+ Years</span>
+                <span class="stat-highlight-name">Web3 Immersion</span>
+              </div>
+              <div class="about-stat-box">
+                <span class="stat-highlight-val">2.5+ Years</span>
+                <span class="stat-highlight-name">Collab Management</span>
+              </div>
+              <div class="about-stat-box">
+                <span class="stat-highlight-val">100+</span>
+                <span class="stat-highlight-name">Web3 Projects Partnered</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COMMUNITIES I WORK WITH SECTION -->
+    <section class="section communities-section" id="communities">
+      <div class="container">
+        
+        <div class="section-heading">
+          <span class="section-tag">MANAGED NETWORKS</span>
+          <h2 class="section-title">Communities I <span class="cyan-text">Work With</span></h2>
+          <p class="section-subtitle">
+            Dedicated Collaboration Manager representing high-conviction Web3 communities with active member bases.
+          </p>
+        </div>
+
+        <div class="communities-grid">
+          
+          <!-- Community 1: Heroes Alpha -->
+          <div class="community-card">
+            <div class="community-card-header">
+              <div class="community-logo-box">
+                <span class="community-avatar-initial">HA</span>
+              </div>
+              <span class="role-badge">Collab Manager</span>
+            </div>
+            
+            <h3 class="community-name">Heroes Alpha</h3>
+            <p class="community-desc">
+              Premier alpha hub focused on early project scouting, curated whitelist distribution, and strategic project collaborations across Web3.
+            </p>
+
+            <div class="community-footer">
+              <a href="https://x.com/herosalpha?s=20" target="_blank" rel="noopener noreferrer" class="btn-community-x">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg-small">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>Follow on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Community 2: Elite Vision -->
+          <div class="community-card">
+            <div class="community-card-header">
+              <div class="community-logo-box">
+                <span class="community-avatar-initial">EV</span>
+              </div>
+              <span class="role-badge">Collab Manager</span>
+            </div>
+            
+            <h3 class="community-name">Elite Vision</h3>
+            <p class="community-desc">
+              Influential Web3 collective connecting top-tier collectors and traders with exclusive project team partnerships and guaranteed mint allocations.
+            </p>
+
+            <div class="community-footer">
+              <a href="https://x.com/_EliteVisions_?s=20" target="_blank" rel="noopener noreferrer" class="btn-community-x">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg-small">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>Follow on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Community 3: Elite Alpha -->
+          <div class="community-card">
+            <div class="community-card-header">
+              <div class="community-logo-box">
+                <span class="community-avatar-initial">EA</span>
+              </div>
+              <span class="role-badge">Collab Manager</span>
+            </div>
+            
+            <h3 class="community-name">Elite Alpha</h3>
+            <p class="community-desc">
+              High-engagement Web3 community dedicated to deep ecosystem research, coordinated giveaway campaigns, and strong cross-community alliances.
+            </p>
+
+            <div class="community-footer">
+              <a href="https://x.com/EliteAlpha_web3?s=20" target="_blank" rel="noopener noreferrer" class="btn-community-x">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg-small">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>Follow on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOUNDER SECTION: VISUALLY DISTINCT CENTERPIECE -->
+    <section class="section founder-section" id="founder">
+      <div class="container">
+        
+        <div class="founder-showcase-card">
+          <div class="founder-glow-backdrop"></div>
+          
+          <div class="founder-inner-content">
+            <div class="founder-badge-row">
+              <span class="founder-pill">
+                <span class="crown-icon">👑</span>
+                FOUNDER & ECOSYSTEM LEAD
+              </span>
+              <span class="founder-community-tag">Flagship Community</span>
+            </div>
+
+            <h2 class="founder-title">Founder of <span class="cyan-text">Alpha Core</span></h2>
+            
+            <p class="founder-quote">
+              "Founder of Alpha Core, a Web3 community focused on building connections, discovering opportunities, and creating a strong ecosystem around Web3 projects."
+            </p>
+
+            <div class="founder-meta-grid">
+              <div class="founder-meta-item">
+                <span class="meta-label">Community</span>
+                <span class="meta-val">Alpha Core</span>
+              </div>
+              <div class="founder-meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-val cyan-highlight">Founder</span>
+              </div>
+              <div class="founder-meta-item">
+                <span class="meta-label">Mission</span>
+                <span class="meta-val">Connections & Ecosystem Growth</span>
+              </div>
+            </div>
+
+            <div class="founder-actions">
+              <a href="https://x.com/Alpha_Core1?s=20" target="_blank" rel="noopener noreferrer" class="btn btn-primary founder-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg-small">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>Visit Alpha Core on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 100+ WEB3 COLLABORATIONS SECTION -->
+    <section class="section collabs-section" id="collaborations">
+      <div class="container">
+        
+        <div class="section-heading text-center">
+          <span class="section-tag">PROVEN TRACK RECORD</span>
+          
+          <!-- Large 100+ Visual Centerpiece -->
+          <div class="centerpiece-banner">
+            <span class="collab-hero-number">100+</span>
+            <h2 class="collab-hero-title">Web3 Collaborations</h2>
+          </div>
+
+          <p class="section-subtitle center-subtitle">
+            Collaborated with 100+ Web3 projects and teams across the ecosystem.
+          </p>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="projects-grid">
+          
+          <!-- Project 1: BrokerFarm -->
+          <div class="collab-project-card">
+            <div class="project-card-header">
+              <div class="project-logo-placeholder">
+                <span class="project-monogram">BF</span>
+              </div>
+              <span class="collab-badge">Verified Collaboration</span>
+            </div>
+            
+            <h3 class="collab-project-name">BrokerFarm</h3>
+            <p class="collab-project-desc">Strategic Web3 allocation and community giveaway partnership.</p>
+            
+            <div class="collab-card-footer">
+              <a href="https://x.com/BrokerFarm?s=20" target="_blank" rel="noopener noreferrer" class="btn-view-project">
+                <span>View Project on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2: Snuffle -->
+          <div class="collab-project-card">
+            <div class="project-card-header">
+              <div class="project-logo-placeholder">
+                <span class="project-monogram">SN</span>
+              </div>
+              <span class="collab-badge">Verified Collaboration</span>
+            </div>
+            
+            <h3 class="collab-project-name">Snuffle</h3>
+            <p class="collab-project-desc">Community outreach, cross-promotional giveaway and allocation campaign.</p>
+            
+            <div class="collab-card-footer">
+              <a href="https://x.com/snuffle_rh?s=20" target="_blank" rel="noopener noreferrer" class="btn-view-project">
+                <span>View Project on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 3: Sheerson Robin -->
+          <div class="collab-project-card">
+            <div class="project-card-header">
+              <div class="project-logo-placeholder">
+                <span class="project-monogram">SR</span>
+              </div>
+              <span class="collab-badge">Verified Collaboration</span>
+            </div>
+            
+            <h3 class="collab-project-name">Sheerson Robin</h3>
+            <p class="collab-project-desc">WL & GTD spot distribution and project amplification campaign.</p>
+            
+            <div class="collab-card-footer">
+              <a href="https://x.com/sheersonrobin?s=20" target="_blank" rel="noopener noreferrer" class="btn-view-project">
+                <span>View Project on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 4: 7TheGoat -->
+          <div class="collab-project-card">
+            <div class="project-card-header">
+              <div class="project-logo-placeholder">
+                <span class="project-monogram">7G</span>
+              </div>
+              <span class="collab-badge">Verified Collaboration</span>
+            </div>
+            
+            <h3 class="collab-project-name">7TheGoat</h3>
+            <p class="collab-project-desc">High-engagement Discord & X collab campaign with community rewards.</p>
+            
+            <div class="collab-card-footer">
+              <a href="https://x.com/7thegoat?s=20" target="_blank" rel="noopener noreferrer" class="btn-view-project">
+                <span>View Project on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 5: Glrtch -->
+          <div class="collab-project-card">
+            <div class="project-card-header">
+              <div class="project-logo-placeholder">
+                <span class="project-monogram">GL</span>
+              </div>
+              <span class="collab-badge">Verified Collaboration</span>
+            </div>
+            
+            <h3 class="collab-project-name">Glrtch</h3>
+            <p class="collab-project-desc">Multi-community FCFS allocation and mutual outreach coordination.</p>
+            
+            <div class="collab-card-footer">
+              <a href="https://x.com/Glrtch?s=20" target="_blank" rel="noopener noreferrer" class="btn-view-project">
+                <span>View Project on X</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Expandable Area for 100+ Collaborations -->
+        <div class="expandable-collabs-wrap">
+          <div class="expanded-grid hidden" id="moreCollabsContainer">
+            
+            <div class="collab-project-card placeholder-collab-card">
+              <div class="project-card-header">
+                <div class="project-logo-placeholder"><span class="project-monogram">W3</span></div>
+                <span class="collab-badge">Tier-1 NFT Projects</span>
+              </div>
+              <h3 class="collab-project-name">Gaming & Metaverse PFP Collabs</h3>
+              <p class="collab-project-desc">Coordinated multi-spot guaranteed mints with top gaming ecosystems.</p>
+              <div class="collab-card-footer">
+                <span class="pill-verified">100+ Total Network</span>
+              </div>
+            </div>
+
+            <div class="collab-project-card placeholder-collab-card">
+              <div class="project-card-header">
+                <div class="project-logo-placeholder"><span class="project-monogram">DF</span></div>
+                <span class="collab-badge">DeFi & Tooling</span>
+              </div>
+              <h3 class="collab-project-name">Web3 Infrastructure & Bot Tools</h3>
+              <p class="collab-project-desc">Early access beta pass raffles and community utility distribution.</p>
+              <div class="collab-card-footer">
+                <span class="pill-verified">100+ Total Network</span>
+              </div>
+            </div>
+
+            <div class="collab-project-card placeholder-collab-card">
+              <div class="project-card-header">
+                <div class="project-logo-placeholder"><span class="project-monogram">AL</span></div>
+                <span class="collab-badge">Alpha Collaborations</span>
+              </div>
+              <h3 class="collab-project-name">Cross-Alpha Alliances</h3>
+              <p class="collab-project-desc">Direct allocations negotiated between major Web3 alpha groups.</p>
+              <div class="collab-card-footer">
+                <span class="pill-verified">100+ Total Network</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="expand-btn-center">
+            <button class="btn btn-secondary" id="toggleMoreCollabsBtn">
+              <span id="toggleCollabsBtnText">View More Collaborations</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon" id="toggleCollabsIcon">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <p class="collab-note">
+              *Displayed highlights represent a small selection of the 100+ Web3 partnerships coordinated by Nova_Eth.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHAT I DO (SERVICES) SECTION -->
+    <section class="section services-section" id="services">
+      <div class="container">
+        
+        <div class="section-heading">
+          <span class="section-tag">EXPERTISE & CAPABILITIES</span>
+          <h2 class="section-title">What <span class="cyan-text">I Do</span></h2>
+          <p class="section-subtitle">
+            Comprehensive Web3 collaboration services designed to connect projects with qualified, active communities.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          
+          <!-- 1. Project Outreach -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Project Outreach</h3>
+            <p class="service-desc">
+              Finding relevant Web3 projects and contacting project teams for collaboration opportunities.
+            </p>
+          </div>
+
+          <!-- 2. Partnership Management -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Partnership Management</h3>
+            <p class="service-desc">
+              Building and maintaining relationships between projects and communities.
+            </p>
+          </div>
+
+          <!-- 3. WL / GTD / FCFS -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3 class="service-title">WL / GTD / FCFS</h3>
+            <p class="service-desc">
+              Helping communities secure WL, Guaranteed, and FCFS allocations.
+            </p>
+          </div>
+
+          <!-- 4. Collaboration Campaigns -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Collaboration Campaigns</h3>
+            <p class="service-desc">
+              Planning and coordinating Web3 collaboration campaigns.
+            </p>
+          </div>
+
+          <!-- 5. Raffles & Giveaways -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 12 20 22 4 22 4 12"/>
+                <rect x="2" y="7" width="20" height="5"/>
+                <line x1="12" y1="22" x2="12" y2="7"/>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Raffles & Giveaways</h3>
+            <p class="service-desc">
+              Managing allocation raffles, giveaways, winner selection, and community distribution.
+            </p>
+          </div>
+
+          <!-- 6. Community Partnerships -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Community Partnerships</h3>
+            <p class="service-desc">
+              Connecting Web3 projects with relevant communities.
+            </p>
+          </div>
+
+          <!-- 7. Discord Collaboration -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+              </svg>
+            </div>
+            <h3 class="service-title">Discord Collaboration</h3>
+            <p class="service-desc">
+              Coordinating collaboration activities and communication through Discord.
+            </p>
+          </div>
+
+          <!-- 8. X / Twitter Collaboration -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </div>
+            <h3 class="service-title">X / Twitter Collaboration</h3>
+            <p class="service-desc">
+              Managing project announcements, quote posts, engagement, and partnership campaigns.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COLLABORATION PROCESS (5-STEP) -->
+    <section class="section process-section" id="process">
+      <div class="container">
+        
+        <div class="section-heading">
+          <span class="section-tag">STRATEGIC WORKFLOW</span>
+          <h2 class="section-title">Collaboration <span class="cyan-text">Process</span></h2>
+          <p class="section-subtitle">
+            A battle-tested 5-step framework ensuring seamless execution from initial discovery to raffle completion.
+          </p>
+        </div>
+
+        <div class="process-timeline">
+          <div class="process-connector-line"></div>
+
+          <!-- Step 1 -->
+          <div class="process-step">
+            <div class="step-indicator">
+              <span class="step-num">01</span>
+              <div class="step-glow"></div>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Discover</h3>
+              <p class="step-desc">
+                Find promising Web3 projects and collaboration opportunities.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-step">
+            <div class="step-indicator">
+              <span class="step-num">02</span>
+              <div class="step-glow"></div>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Outreach</h3>
+              <p class="step-desc">
+                Contact project teams and introduce community partnership opportunities.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-step">
+            <div class="step-indicator">
+              <span class="step-num">03</span>
+              <div class="step-glow"></div>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Negotiate</h3>
+              <p class="step-desc">
+                Discuss collaboration terms, allocations, requirements, and campaign structure.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-step">
+            <div class="step-indicator">
+              <span class="step-num">04</span>
+              <div class="step-glow"></div>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Secure</h3>
+              <p class="step-desc">
+                Secure WL, GTD, FCFS, or other collaboration opportunities.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="process-step">
+            <div class="step-indicator">
+              <span class="step-num">05</span>
+              <div class="step-glow"></div>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Execute</h3>
+              <p class="step-desc">
+                Coordinate announcements, raffles, winners, and community support.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESULTS & EXPERIENCE SECTION (STRICT VERIFIED DATA ONLY) -->
+    <section class="section results-section" id="results">
+      <div class="container">
+        
+        <div class="section-heading text-center">
+          <span class="section-tag">VERIFIED METRICS</span>
+          <h2 class="section-title">Results & <span class="cyan-text">Experience</span></h2>
+          <p class="section-subtitle center-subtitle">
+            Measurable impact backed by years of dedicated Web3 collaboration execution.
+          </p>
+        </div>
+
+        <div class="results-grid">
+          
+          <div class="result-card">
+            <div class="result-number-wrap">
+              <span class="result-number">4+</span>
+              <span class="result-unit">Years</span>
+            </div>
+            <h3 class="result-label">Web3 Experience</h3>
+            <p class="result-sub">Deep immersion across evolving Web3 cycles</p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number-wrap">
+              <span class="result-number">2.5+</span>
+              <span class="result-unit">Years</span>
+            </div>
+            <h3 class="result-label">Collab Management</h3>
+            <p class="result-sub">Hands-on community leadership & partnership building</p>
+          </div>
+
+          <div class="result-card highlighted-result-card">
+            <div class="result-number-wrap">
+              <span class="result-number">100+</span>
+            </div>
+            <h3 class="result-label">Projects Collaborated With</h3>
+            <p class="result-sub">Successful allocation & partnership campaigns</p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number-wrap">
+              <span class="result-number">3</span>
+            </div>
+            <h3 class="result-label">Communities as Collab Manager</h3>
+            <p class="result-sub">Heroes Alpha, Elite Vision, Elite Alpha</p>
+          </div>
+
+          <div class="result-card">
+            <div class="result-number-wrap">
+              <span class="result-number">1</span>
+            </div>
+            <h3 class="result-label">Community Founded</h3>
+            <p class="result-sub">Founder of Alpha Core</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROOF OF WORK SECTION -->
+    <section class="section proof-section" id="proof">
+      <div class="container">
+        
+        <div class="section-heading">
+          <div class="heading-between">
+            <div>
+              <span class="section-tag">AUTHENTIC EVIDENCE</span>
+              <h2 class="section-title">Proof of <span class="cyan-text">Work</span></h2>
+            </div>
+            <div class="privacy-notice-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="shield-svg">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Private information has been hidden where necessary.</span>
+            </div>
+          </div>
+          <p class="section-subtitle">
+            Real verification records from project team communications, confirmed allocation sheets, giveaway setups, and live campaign executions.
+          </p>
+        </div>
+
+        <div class="proof-grid">
+          
+          <!-- Proof Item 1: Collab Confirmation -->
+          <div class="proof-card" data-category="confirmations" data-title="Project Collaboration Confirmation">
+            <div class="proof-preview-box">
+              <div class="mock-chat-bubble">
+                <span class="mock-chat-user">Project Founder</span>
+                <span class="mock-chat-msg">"Hey Nova_Eth, we'd love to lock in 15x GTD and 30x FCFS spots for your community. Sending over the campaign details!"</span>
+                <div class="mock-chat-status">Verified DM &bull; Confirmed</div>
+              </div>
+              <div class="proof-overlay-btn">
+                <span>View Full Proof</span>
+              </div>
+            </div>
+            <div class="proof-meta">
+              <span class="proof-tag">Collaboration Confirmation</span>
+              <h3 class="proof-title">Project Team Direct Agreement</h3>
+            </div>
+          </div>
+
+          <!-- Proof Item 2: WL/GTD Allocation Screenshot -->
+          <div class="proof-card" data-category="allocations" data-title="WL / GTD Allocation Sheet">
+            <div class="proof-preview-box">
+              <div class="mock-sheet-preview">
+                <div class="mock-sheet-row header">
+                  <span>Community</span>
+                  <span>Type</span>
+                  <span>Allocation</span>
+                </div>
+                <div class="mock-sheet-row">
+                  <span>Alpha Core</span>
+                  <span>GTD</span>
+                  <span>20 Spots [Locked]</span>
+                </div>
+                <div class="mock-sheet-row">
+                  <span>Heroes Alpha</span>
+                  <span>FCFS</span>
+                  <span>50 Spots [Active]</span>
+                </div>
+              </div>
+              <div class="proof-overlay-btn">
+                <span>View Full Proof</span>
+              </div>
+            </div>
+            <div class="proof-meta">
+              <span class="proof-tag">Allocation Sheet</span>
+              <h3 class="proof-title">WL / GTD Allocation Log</h3>
+            </div>
+          </div>
+
+          <!-- Proof Item 3: Discord Collab Setup -->
+          <div class="proof-card" data-category="discord" data-title="Discord Giveaway & Collab Channel">
+            <div class="proof-preview-box">
+              <div class="mock-discord-post">
+                <div class="discord-bot-badge">🎉 COLLAB ANNOUNCEMENT</div>
+                <p>Excited to announce our partnership with @ProjectTeam! React to enter the GTD mint giveaway!</p>
+                <div class="discord-reactions">❤️ 412 &bull; 🚀 350 &bull; 🔥 289</div>
+              </div>
+              <div class="proof-overlay-btn">
+                <span>View Full Proof</span>
+              </div>
+            </div>
+            <div class="proof-meta">
+              <span class="proof-tag">Discord Collaboration</span>
+              <h3 class="proof-title">Discord Collab Channel & Bot Setup</h3>
+            </div>
+          </div>
+
+          <!-- Proof Item 4: Raffle Results & Winner Sheet -->
+          <div class="proof-card" data-category="raffles" data-title="Raffle Results & Winner Sheets">
+            <div class="proof-preview-box">
+              <div class="mock-winner-sheet">
+                <div class="winner-row verified">✓ 0x8a...3F19 &mdash; GTD #01</div>
+                <div class="winner-row verified">✓ 0x4c...92B1 &mdash; GTD #02</div>
+                <div class="winner-row verified">✓ 0x1e...880A &mdash; GTD #03</div>
+                <div class="sheet-status">Distribution Finalized & Exported</div>
+              </div>
+              <div class="proof-overlay-btn">
+                <span>View Full Proof</span>
+              </div>
+            </div>
+            <div class="proof-meta">
+              <span class="proof-tag">Raffle Results</span>
+              <h3 class="proof-title">Winner Sheets & On-Chain Wallet Collection</h3>
+            </div>
+          </div>
+
+          <!-- Proof Item 5: X Collaboration Post -->
+          <div class="proof-card" data-category="twitter" data-title="X / Twitter Collaboration Post">
+            <div class="proof-preview-box">
+              <div class="mock-tweet-card">
+                <div class="tweet-user">@nova_3th &bull; Official Post</div>
+                <p>Huge partnership locked with @BrokerFarm! Bringing 25x WL spots to our Alpha network.</p>
+                <div class="tweet-metrics">54 Reposts &bull; 1.2K Views &bull; 180 Likes</div>
+              </div>
+              <div class="proof-overlay-btn">
+                <span>View Full Proof</span>
+              </div>
+            </div>
+            <div class="proof-meta">
+              <span class="proof-tag">X Collaboration Post</span>
+              <h3 class="proof-title">Public Partnership Announcement</h3>
+            </div>
+          </div>
+
+          <!-- Proof Item 6: Project Team Conversations -->
+          <div class="proof-card" data-category="conversations" data-title="Project Team Outreach & Terms">
+            <div class="proof-preview-box">
+              <div class="mock-chat-bubble">
+                <span class="mock-chat-user">Lead Collab Coordinator</span>
+                <span class="mock-chat-msg">"Campaign finalized. Your community members are whitelisted on our contract. Appreciate the smooth coordination!"</span>
+                <div class="mock-chat-status">Campaign Completed &bull; Successful</div>
+              </div>
+              <div class="proof-overlay-btn">
+                <span>View Full Proof</span>
+              </div>
+            </div>
+            <div class="proof-meta">
+              <span class="proof-tag">Project Team Outreach</span>
+              <h3 class="proof-title">Terms & Execution Sign-Off</h3>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHY WORK WITH NOVA_ETH SECTION -->
+    <section class="section why-section" id="why">
+      <div class="container">
+        
+        <div class="section-heading">
+          <span class="section-tag">VALUE PROPOSITION</span>
+          <h2 class="section-title">Why Work With <span class="cyan-text">Nova_Eth</span></h2>
+          <p class="section-subtitle">
+            Reliable communication, fast turnaround times, and verified access to high-conviction Web3 audiences.
+          </p>
+        </div>
+
+        <div class="why-grid">
+          
+          <!-- Card 1 -->
+          <div class="why-card">
+            <div class="why-icon-box">
+              <span class="why-icon-txt">01</span>
+            </div>
+            <h3 class="why-card-title">Web3 Experience</h3>
+            <p class="why-card-desc">
+              4+ years inside the Web3 ecosystem.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="why-card">
+            <div class="why-icon-box">
+              <span class="why-icon-txt">02</span>
+            </div>
+            <h3 class="why-card-title">Collab Experience</h3>
+            <p class="why-card-desc">
+              2.5+ years focused specifically on collaboration management.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="why-card">
+            <div class="why-icon-box">
+              <span class="why-icon-txt">03</span>
+            </div>
+            <h3 class="why-card-title">100+ Collaborations</h3>
+            <p class="why-card-desc">
+              Experience collaborating with 100+ Web3 projects.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="why-card">
+            <div class="why-icon-box">
+              <span class="why-icon-txt">04</span>
+            </div>
+            <h3 class="why-card-title">Community Network</h3>
+            <p class="why-card-desc">
+              Active involvement with multiple Web3 communities and founder of Alpha Core.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT / FINAL CTA SECTION -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        
+        <div class="contact-box">
+          <div class="contact-glow-circle"></div>
+
+          <div class="contact-content-inner">
+            <span class="section-tag">INITIATE PARTNERSHIP</span>
+            
+            <h2 class="contact-title">Let's Build the Next Web3 Collaboration.</h2>
+            
+            <p class="contact-description">
+              Have a Web3 project or community looking for collaboration opportunities? Let's connect.
+            </p>
+
+            <!-- Direct Contact Methods -->
+            <div class="contact-options-row">
+              
+              <div class="contact-method-card">
+                <div class="method-icon-box">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg-medium">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </div>
+                <div class="method-info">
+                  <span class="method-title">Direct Message on X</span>
+                  <span class="method-handle">@nova_3th</span>
+                </div>
+                <a href="https://x.com/nova_3th" target="_blank" rel="noopener noreferrer" class="btn btn-primary method-btn">
+                  <span>DM Me on X</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+                </a>
+              </div>
+
+              <div class="contact-method-card">
+                <div class="method-icon-box">
+                  <svg viewBox="0 0 24 24" fill="currentColor" class="social-svg-medium">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                  </svg>
+                </div>
+                <div class="method-info">
+                  <span class="method-title">Discord Communication</span>
+                  <span class="method-handle">@nova_3th</span>
+                </div>
+                <button class="btn btn-secondary method-btn" id="contactDiscordBtn" data-discord="@nova_3th">
+                  <span>Connect on Discord</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-svg"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <a href="#home" class="footer-brand">
+          <span class="brand-name">Nova_Eth</span>
+          <span class="footer-tag">Web3 Collab Manager</span>
+        </a>
+        <p class="footer-copy">
+          4+ Years Web3 &bull; 2.5+ Years Collab Management &bull; 100+ Collaborations &bull; Founder of Alpha Core.
+        </p>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="https://x.com/nova_3th" target="_blank" rel="noopener noreferrer">X: @nova_3th</a>
+          <button class="footer-discord-link" id="footerDiscordBtn" data-discord="@nova_3th">Discord: @nova_3th</button>
+          <a href="admin.html" class="footer-admin-link">⚙️ Admin Panel</a>
+        </div>
+        <p class="footer-credits">&copy; 2026 Nova_Eth. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Proof of Work -->
+  <div class="modal-backdrop" id="proofModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <span class="modal-badge">Verification Record</span>
+        <h3 class="modal-title" id="proofModalTitle">Proof of Work Detail</h3>
+      </div>
+      <div class="modal-body" id="proofModalBody">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="modal-footer">
+        <span class="modal-notice">Confidential data sanitized in accordance with project team NDAs.</span>
+        <button class="btn btn-secondary" id="modalDismissBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Toast Notification -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Shared Data & CMS Script -->
+  <script src="site-data.js"></script>
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
